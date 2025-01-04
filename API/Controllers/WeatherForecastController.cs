@@ -21,6 +21,15 @@ public class WeatherForecastController : ControllerBase
     [HttpGet(Name = "GetWeatherForecast")]
     public IEnumerable<WeatherForecast> Get()
     {
+        try
+        {
+            throw new Exception("Test exception");
+        }
+        catch (System.Exception ex)
+        {
+            _logger.LogError(ex, "throwed from weather api");
+        }
+        
         _logger.LogInformation("Getting weather forecast");
         return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
